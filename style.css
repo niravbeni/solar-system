@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.label {
+    color: #FFF;
+    font-family: sans-serif;
+    padding: 1px;
+    opacity: 0;
+    background: rgba( 0, 0, 0, .6 );
+}
+
+.labelAlt {
+    color: #FFF;
+    font-family: sans-serif;
+    padding: 1px;
+    opacity: 0;
+    background: rgba( 0, 0, 0, .6 );
+}
+
+.dg.ac {
+    z-index: 1000 !important;
+    
+}
+
