@@ -685,6 +685,7 @@ const loop = () => {
     uranusOrbit.mesh.visible = true;
     neptuneOrbit.mesh.visible = true;
   }
+
   //gui label
   if (planetLabel.label) {
     sunLabelDiv.style.opacity = 1;
