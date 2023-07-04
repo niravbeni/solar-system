@@ -8,6 +8,17 @@ import {
 } from "three/addons/renderers/CSS2DRenderer.js";
 import { GUI } from "dat.gui";
 
+//progress bar
+var manager = new THREE.LoadingManager();
+const progressBar = document.getElementById("progress-bar");
+manager.onProgress = function (item, loaded, total) {
+  progressBar.value = (loaded / total) * 100;
+};
+const progressBarContainer = document.querySelector(".progress-bar-container");
+manager.onLoad = function () {
+  progressBarContainer.style.display = "none";
+};
+
 //declare variables
 let camera, scene, renderer, labelRenderer;
 
@@ -114,7 +125,7 @@ scene.add(star);
 
 //sun mesh
 const sunGeometry = new THREE.SphereGeometry(dim.sunSize, 64, 64);
-const sunTexture = new THREE.TextureLoader().load("sun.jpg");
+const sunTexture = new THREE.TextureLoader(manager).load("sun.jpg");
 const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
@@ -173,7 +184,7 @@ orbitsOff();
 //planet function
 function generatePlanet(name, size, position, image, alt, ring) {
   const geometry = new THREE.SphereGeometry(size, 30, 30);
-  const texture = new THREE.TextureLoader().load(image);
+  const texture = new THREE.TextureLoader(manager).load(image);
   var material = 0;
   var ringMaterial = 0;
   var labelDiv = 0;
@@ -186,7 +197,7 @@ function generatePlanet(name, size, position, image, alt, ring) {
   const object = new THREE.Object3D();
   var ringmesh = 0;
   if (ring) {
-    const ringTexture = new THREE.TextureLoader().load(ring.texture);
+    const ringTexture = new THREE.TextureLoader(manager).load(ring.texture);
     const ringGeometry = new THREE.RingGeometry(
       ring.innerRadius,
       ring.outerRadius,
@@ -415,7 +426,7 @@ window.addEventListener("resize", () => {
 });
 
 //background texture
-const starTexture = new THREE.CubeTextureLoader().load([
+const starTexture = new THREE.CubeTextureLoader(manager).load([
   "stars.jpg",
   "stars.jpg",
   "stars.jpg",
